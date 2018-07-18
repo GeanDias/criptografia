@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <math.h>
+
+#define N1 13
+#define N2 17
+
+int produto_maior(int n1, int n2);
+int produto_menor(int n1, int n2);
+void fatores_primos(int n);
+
+
+
+int main(){
+
+        int maior, menor;
+
+        maior = produto_maior(N1, N2);
+        menor = produto_menor(N1, N2);
+        printf("%d  %d\n", maior, menor);       
+        fatores_primos(menor);
+        printf("\n");
+
+return 0;
+}
+
+
+int produto_maior(int n1, int n2){
+
+        return (n1*n2);
+}
+
+int produto_menor(int n1, int n2){
+
+        return ((n1-1)*(n2-1));
+}
+
+void fatores_primos(int n)
+{
+        int i;
+    // Print the number of 2s that divide n
+    while (n%2 == 0)
+    {
+        printf("%d ", 2);
+        n = n/2;
+    }
+
+    // n must be odd at this point.  So we can skip
+    // one element (Note i = i +2)
+    for (i = 3; i <= sqrt(n); i = i+2)
+    {
+        // While i divides n, print i and divide n
+        while (n%i == 0)
+        {
+            printf("%d ", i);
+            n = n/i;
+        }
+    }
+
+    // This condition is to handle the case when n
+    // is a prime number greater than 2
+    if (n > 2)
+        printf ("%d ", n);
+}
