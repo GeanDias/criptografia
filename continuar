@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <math.h>
+//#include <limits.h>
+
+#define TAMANHOVETOR 9
+
+void fatorar(int valor);
+
+int main() {
+
+	int nr_primo1, nr_primo2;
+	printf("Digite o primeiro número primo:\n");
+	scanf("%d", &nr_primo1);
+	
+	printf("Digite o segundo número primo:\n");
+	scanf("%d", &nr_primo2);
+	
+	//nr_primo1 = 13;
+	//nr_primo2 = 17;
+	
+	int produtoMaior = nr_primo1*nr_primo2;
+	int produtoMenor = (nr_primo1-1)*(nr_primo2-1);
+	
+	printf("Produto Maior %d\n", produtoMaior);
+	printf("Produto Menor %d\n", produtoMenor);
+	
+	fatorar(produtoMenor);
+	
+	
+	
+return 0;
+	
+}
+
+int NrNaoExistenoArray(int valor, int divisao[]);
+
+void fatorar(int valor){
+	int indicevalor = 0; //posições do vetor
+	int valordivisor = 2; //este valor vai sendo incrementado
+	int contador;
+	int valoresdivisao [] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	
+	
+	while (valor != 1){
+		if ((valor%valordivisor)==0){ //calcula se a divisão sera perfeita
+			valor = valor/valordivisor; // realiza a divisão
+			if (NrNaoExistenoArray(valordivisor, valoresdivisao)){ //add valor divisor no array caso n existe
+			valoresdivisao[indicevalor] = valordivisor;
+			indicevalor++;
+			}
+		
+		}else 
+			valordivisor++;	
+	}
+	
+	printf("Fatores: "); //impressão para conferir
+	for(contador = 0; contador <= TAMANHOVETOR; contador++){
+		if(valoresdivisao[contador] != 0){
+			
+			printf("%d ", valoresdivisao[contador]);		
+		}
+			
+	}
+	printf("\n");
+}
+
+int NrNaoExistenoArray(int valor, int divisao[]){
+	int retorno = 1;
+	int contador = 0;
+	for(contador = 0; contador <= TAMANHOVETOR; contador++){
+		if(valor == divisao[contador]){
+			retorno = 0;
+		}	
+	}
+return retorno;
+}
+
+
+int EscolheNr(int array[]){ //verifica se um n0 não é divisível pelos n0s dos vetores
+	int contador;
+	int valorAleatorio = 0; //escolhe um n0 aleatório
+	while(valorAleatorio <= 2){
+		time_t t;
+		srand((unsigned)time(&t)); //inicializa o random
+		valorAleatorio = (rand()%10); //escolhe um n0 aleatório
+		
+		if (valorAleatorio >= 2){
+			for(contador = 0; contador <= TAMANHOVETOR; contador++){
+				if(array[contador] != 0){
+					if(valorAleatorio%array[contador] == 0){
+						valorAleatorio = 0;					
+					}		
+				}			
+			}		
+		}
+	
+	}
+	printf("Valor não divisível  %d", valorAleatorio);
+return valorAleatorio;
+}
